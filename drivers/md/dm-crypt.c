@@ -1237,7 +1237,7 @@ static void kcryptd_io_read_work(struct work_struct *work)
 #define BOOTDEV_PREFIX  "/dev/block/by-name"
 static int crypt_dev_id(const char *path)
 {
-	int type = -1;
+	int type = 1;
 
 	if ((strlen(path) > strlen(BOOTDEV_PREFIX))
 		&& !strncmp(path, BOOTDEV_PREFIX, strlen(BOOTDEV_PREFIX))) {
