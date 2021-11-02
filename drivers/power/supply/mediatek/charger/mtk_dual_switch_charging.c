@@ -115,6 +115,7 @@ extern int confirm_MT5715_works(void);
 //prize added by sunshuai, wireless charge MT5715  soft start, 20190302-end
 
 
+#if 0
 static int _uA_to_mA(int uA)
 {
 	if (uA == -1)
@@ -122,6 +123,7 @@ static int _uA_to_mA(int uA)
 	else
 		return uA / 1000;
 }
+#endif
 
 static bool is_in_pe40_state(struct charger_manager *info)
 {
@@ -498,8 +500,8 @@ dual_swchg_select_charging_current_limit(struct charger_manager *info)
 			pdata->charging_current_limit = 1000000;
 		}
 	}
-	printk("PRIZE master  charge current %d:%d\n",pdata->input_current_limit,pdata->charging_current_limit);
-	printk("PRIZE slave   charge current %d:%d\n",pdata2->input_current_limit,pdata2->charging_current_limit);
+//	printk("PRIZE master  charge current %d:%d\n",pdata->input_current_limit,pdata->charging_current_limit);
+//	printk("PRIZE slave   charge current %d:%d\n",pdata2->input_current_limit,pdata2->charging_current_limit);
 
 #endif
 //prize add by sunshuai for Bright screen current limit  20181130 end
@@ -613,6 +615,7 @@ done:
 		pdata2->input_current_limit = pdata2->input_current_limit / 2;
 	}
 
+#if 0
 	pr_notice("force:%d %d thermal:(%d %d,%d %d)(%d %d %d)setting:(%d %d)(%d %d)",
 		_uA_to_mA(pdata->force_charging_current),
 		_uA_to_mA(pdata2->force_charging_current),
@@ -633,6 +636,7 @@ done:
 		IS_ENABLED(CONFIG_USBIF_COMPLIANCE), info->usb_state,
 		_uA_to_mA(pdata->input_current_limit_by_aicl),
 		info->atm_enabled, info->data.parallel_vbus);
+#endif
 
 	charger_dev_set_input_current(info->chg1_dev,
 					pdata->input_current_limit);

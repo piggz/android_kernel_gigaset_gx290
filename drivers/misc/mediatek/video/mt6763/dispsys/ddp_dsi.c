@@ -2190,8 +2190,8 @@ UINT32 DSI_dcs_read_lcm_reg_v2(enum DISP_MODULE_ENUM module,
 					recv_data_cnt);
 				recv_data_cnt = buffer_size;
 			}
-			DISPCHECK("DSI read long packet size: %d\n",
-				  recv_data_cnt);
+			//DISPCHECK("DSI read long packet size: %d\n",
+			//	  recv_data_cnt);
 
 			if (recv_data_cnt <= 4) {
 				memcpy((void *)buffer, (void *)&read_data1,
@@ -4445,7 +4445,7 @@ int ddp_dsi_build_cmdq(enum DISP_MODULE_ENUM module, void *cmdq_trigger_handle, 
 
 			lcm_esd_tb = &dsi_params->lcm_esd_check_table[i];
 	//prize-chenhongjin-20190327 for lcd esd 607 start
-#if 1
+#if 0
 			printk("[DSI]enter cmp read_data0 byte0=0x%x byte1=0x%x byte2=0x%x byte3=0x%x\n",read_data0.byte0, read_data0.byte1, read_data0.byte2,	read_data0.byte3);
 			printk("[DSI]enter cmp read_data1 byte0=0x%x byte1=0x%x byte2=0x%x byte3=0x%x\n",read_data1.byte0, read_data1.byte1, read_data1.byte2,	read_data1.byte3);
 			printk("[DSI]enter cmp read_data2 byte0=0x%x byte1=0x%x byte2=0x%x byte3=0x%x\n",read_data2.byte0, read_data2.byte1, read_data2.byte2,	read_data2.byte3);
@@ -4454,14 +4454,14 @@ int ddp_dsi_build_cmdq(enum DISP_MODULE_ENUM module, void *cmdq_trigger_handle, 
 
 			printk("[DSI]enter cmp check_tab cmd=0x%x,cnt=0x%x\n",
 				lcm_esd_tb->cmd, lcm_esd_tb->count);
-#endif
+
 			
 	printk("[DSI]para_list[0]=0x%x,para_list[1]=0x%x, para_list[2]=0x%x\n",
 				lcm_esd_tb->para_list[0],
 				lcm_esd_tb->para_list[1],
 				lcm_esd_tb->para_list[2]);
 				printk("[DSI]para_list[0]=0x%x,para_list[1]=0x%x, para_list[2]=0x%x\n",lcm_esd_tb->para_list[0],lcm_esd_tb->para_list[1],lcm_esd_tb->para_list[2]);
-				
+#endif
 			DISPDBG("[DSI]enter cmp DSI+0x200=0x%x\n",
 				AS_UINT32(DISPSYS_DSI0_BASE + 0x200));
 			DISPDBG("[DSI]enter cmp DSI+0x204=0x%x\n",
@@ -4493,11 +4493,11 @@ int ddp_dsi_build_cmdq(enum DISP_MODULE_ENUM module, void *cmdq_trigger_handle, 
 				if (recv_data_cnt > lcm_esd_tb->count)
 					recv_data_cnt = lcm_esd_tb->count;
 
-				DISPCHECK("DSI read long packet size: %d\n",
-					recv_data_cnt);
+	//			DISPCHECK("DSI read long packet size: %d\n",
+	//				recv_data_cnt);
 	//prize-chenhongjin-20190327 for lcd esd 607 start
 
-                        printk("esd check data: %x\n",read_data0.byte1);
+                        //printk("esd check data: %x\n",read_data0.byte1);
 			if( dsi_params->lcm_esd_check_table[i].count == 3)
 			{	
 				if((read_data1.byte0 == dsi_params->lcm_esd_check_table[i].para_list[0])&&
@@ -4508,7 +4508,7 @@ int ddp_dsi_build_cmdq(enum DISP_MODULE_ENUM module, void *cmdq_trigger_handle, 
 				{
 				/* clear rx data */
 				/* DSI_OUTREG32(NULL, &DSI_REG[dsi_i]->DSI_RX_DATA0,0); */
-					printk ("%s esd check ok.\n", __func__);
+					//printk ("%s esd check ok.\n", __func__);
 				ret = 0;	/* esd pass */
 				}
 				else
@@ -4528,7 +4528,7 @@ int ddp_dsi_build_cmdq(enum DISP_MODULE_ENUM module, void *cmdq_trigger_handle, 
 				{
 				/* clear rx data */
 				/* DSI_OUTREG32(NULL, &DSI_REG[dsi_i]->DSI_RX_DATA0,0); */
-					printk ("%s esd check ok.\n", __func__);
+//					printk ("%s esd check ok.\n", __func__);
 				ret = 0;	/* esd pass */
 				}
 				else
@@ -4549,7 +4549,7 @@ int ddp_dsi_build_cmdq(enum DISP_MODULE_ENUM module, void *cmdq_trigger_handle, 
 				{
 				/* esd fail */
 				// DSI_OUTREG32(NULL, &DSI_REG[dsi_i]->DSI_RX_DATA0,0);
-					printk ("%s esd check ok.\n", __func__);
+//					printk ("%s esd check ok.\n", __func__);
 					ret = 0; // esd pass
 				}
 				else

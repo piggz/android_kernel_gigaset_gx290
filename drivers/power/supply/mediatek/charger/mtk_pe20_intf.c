@@ -571,7 +571,7 @@ int mtk_pe20_start_algorithm(struct charger_manager *pinfo)
 	struct mtk_pe20 *pe20 = &pinfo->pe2;
 
 	if (!pinfo->enable_hv_charging) {
-		chr_info("%s: hv charging is disabled\n", __func__);
+//		chr_info("%s: hv charging is disabled\n", __func__);
 		if (pe20->is_connect) {
 			pe20_leave(pinfo);
 			pe20->to_check_chr_type = true;
@@ -580,8 +580,8 @@ int mtk_pe20_start_algorithm(struct charger_manager *pinfo)
 	}
 
 	if (!pe20->is_enabled) {
-		chr_info("%s: stop, PE+20 is disabled\n",
-			__func__);
+//		chr_info("%s: stop, PE+20 is disabled\n",
+//			__func__);
 		return ret;
 	}
 
@@ -594,8 +594,8 @@ int mtk_pe20_start_algorithm(struct charger_manager *pinfo)
 
 	if (!pe20->is_connect) {
 		ret = -EIO;
-		chr_info("%s: stop, PE+20 is not connected\n",
-			__func__);
+//		chr_info("%s: stop, PE+20 is not connected\n",
+//			__func__);
 		__pm_relax(&pe20->suspend_lock);
 		mutex_unlock(&pe20->access_lock);
 		return ret;
